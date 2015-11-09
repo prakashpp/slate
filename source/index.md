@@ -139,7 +139,7 @@ This endpoint retrieves all parties.
 
 ### Filter the list
 
-`GET https://demo.fulfil.io/api/v1/model/party.party?domain=[['name', 'ilike', '%daniel%']]`
+`GET https://demo.fulfil.io/api/v1/model/party.party?filter=[['name', 'ilike', '%daniel%']]`
 
 ### Query Parameters
 
@@ -346,7 +346,7 @@ This endpoint retrieves all customer shipments.
 
 ### Filter the list for shipments in a specific state
 
-`GET https://demo.fulfil.io/api/v1/model/stock.shipment.out?domain=[['state', '=', 'waiting']]`
+`GET https://demo.fulfil.io/api/v1/model/stock.shipment.out?filter=[['state', '=', 'waiting']]`
 
 ### Query Parameters
 
@@ -501,11 +501,11 @@ product1 = requests.get(
 ).json()
 
 customer_location = requests.get(
-    'https://demo.fulfil.io/api/v1/model/stock.location?domain=[["code", "=", "CUS"]]',
+    'https://demo.fulfil.io/api/v1/model/stock.location?filter=[["code", "=", "CUS"]]',
     auth=auth
 ).json()[0]
 output_location = requests.get(
-    'https://demo.fulfil.io/api/v1/model/stock.location?domain=[["code", "=", "OUT"]]',
+    'https://demo.fulfil.io/api/v1/model/stock.location?filter=[["code", "=", "OUT"]]',
     auth=auth
 ).json()[0]
 
