@@ -8,12 +8,12 @@
 
     <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
       <script src="javascripts/all.js" type="text/javascript"></script>
 
       <script>
         $(function() {
-          setupLanguages(["shell","ruby","python"]);
+          setupLanguages(["shell","python"]);
         });
       </script>
   </head>
@@ -29,7 +29,6 @@
       <img src="images/logo.png" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
               <a href="#" data-language-name="python">python</a>
         </div>
         <div class="search">
@@ -46,81 +45,131 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+        <h1 id="introduction">Introduction</h1>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>Fulfil.IO is software to track your inventory, whether you sell 
+online, offline or through a third party like Shopify.</p>
 
-<p>This example API documentation page was created with <a href="http://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
+<h2 id="what-can-i-do-with-this-api">What can I do with this API ?</h2>
+
+<p>Everything :-)</p>
+
+<p>Any operation that can be done by an user can be done through our
+API. If you are not able to figure out a way of doing it do get in
+touch with our team and we will help you.</p>
+
+<h2 id="why-should-i-use-this-api">Why should I use this API ?</h2>
+
+<p>Some common use cases:</p>
+
+<ol>
+<li>You have an order system like an e-commerce engine (shopify, 
+magento, prestashop) and you want to integrate with Fulfil.IO
+for fulfilling those orders.</li>
+<li>You have a point of sale system and you want to know the
+inventory from Fulfil.IO.</li>
+<li>Creating products, managing catalogs, so on and so forth.</li>
+<li>Dashboards, reports.</li>
+</ol>
+
+<h2 id="test-api-connection">Test API Connection</h2>
+
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://demo.fulfil.io/api/v1/test'</span><span class="p">,</span>
+    <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'APIKEY'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre><code class="highlight shell"><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
-
-<p><aside class="notice">
-You must replace <code class="prettyprint">meowmeowmeow</code> with your personal API key.
-</aside></p>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
-<pre><code class="highlight shell">curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the APIKEY as basic auth username</span>
+curl <span class="s2">"https://demo.fulfil.io/api/v1/test"</span>
+  -u APIKEY:
 </code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Special cases aren't special enough to break the rules."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>A convenient way to test if your source code is working is by
+calling the <code class="prettyprint">/test</code> endpoint, which returns a success flag and
+a useful message from the zen of python.</p>
+
+<aside class="notice">
+Make sure to replace `APIKEY` with your API key.
+</aside>
+
+<h2 id="authentication">Authentication</h2>
+
+<p>You need to <a href="https://fulfilio.zendesk.com/hc/en-us/articles/213488947-Creating-API-Tokens">generate an API key</a>
+for your username first.
+You should be able to do this from User Preferences menu or
+you can generate it from your Users menu. (Access to the
+users menu is limited to administrators.)</p>
+
+<p><code class="prettyprint">Authorization: Basic base64-encoded-api-key</code></p>
+
+<aside class="notice">
+You must replace <code>base64-encoded-api-key</code> with your base64 encoded API key.
+</aside>
+
+<h2 id="common-fields-on-all-records">Common fields on all records</h2>
+
+<p>All records have some metadata that is common.</p>
+
+<p>Field Name | Description</p>
+
+<hr>
+
+<p>create_uid | ID of the use who created the record
+create_date| The UTC timestamp at which the record was created
+write_uid | ID of the use who last edited the record (could be null if record was never edited)
+write_date| The UTC timestamp at which the record was last modified. (could be null)</p>
+
+<h1 id="contacts">Contacts</h1>
+
+<h2 id="get-all-parties">Get All Parties</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://demo.fulfil.io/api/v1/model/party.party'</span><span class="p">,</span>
+    <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'APIKEY'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://demo.fulfil.io/api/v1/model/party.party"</span>
+  -u APIKEY:
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="nt">"rec_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABC Inc."</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="nt">"rec_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Daniel Craig"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="nt">"rec_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sharoon Thomas"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET http://example.com/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<p>This endpoint retrieves all parties.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://demo.fulfil.io/api/v1/model/party.party</code></p>
+
+<h3 id="filter-the-list">Filter the list</h3>
+
+<p><code class="prettyprint">GET https://demo.fulfil.io/api/v1/model/party.party?domain=[[&#39;name&#39;, &#39;ilike&#39;, &#39;%daniel%&#39;]]</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -129,52 +178,164 @@ You must replace <code class="prettyprint">meowmeowmeow</code> with your persona
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>page</td>
+<td>1</td>
+<td>Select the page when there are more records</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>per_page</td>
+<td>10</td>
+<td>The number of results per page. Larger the number, slower the response</td>
 </tr>
 </tbody></table>
 
-<p><aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside></p>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id="create-a-new-party">Create a new party</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'https://demo.fulfil.io/api/v1/model/party.party'</span><span class="p">,</span>
+    <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'APIKEY'</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="n">json</span><span class="o">=</span><span class="p">[{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'New party'</span><span class="p">}]</span>
+<span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre><code class="highlight shell">curl <span class="s2">"http://example.com/api/kittens/3"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre class="highlight shell"><code>curl <span class="se">\</span>
+    -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+    -X POST <span class="se">\</span>
+    -d <span class="s1">'[{"name": "New party"}]'</span> <span class="se">\</span>
+    -u APIKEY: <span class="se">\</span>
+    https://demo.fulfil.io/api/v1/model/party.party
 </code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<pre class="highlight json"><code><span class="p">[{</span><span class="nt">"rec_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New party"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">}]</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
+<h2 id="get-a-specific-party">Get a Specific Party</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<p><aside class="warning">If you&rsquo;re not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside></p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://demo.fulfil.io/api/v1/model/party.party/1'</span><span class="p">,</span>
+    <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'APIKEY'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://demo.fulfil.io/api/v1/model/party.party/1"</span>
+  -u APIKEY:
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fulfil.IO INC"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lang"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+
+  </span><span class="err">#</span><span class="w"> </span><span class="err">Computed</span><span class="w"> </span><span class="err">information</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">quick</span><span class="w"> </span><span class="err">access</span><span class="w">
+  </span><span class="err">#</span><span class="w"> </span><span class="err">You</span><span class="w"> </span><span class="err">cannot</span><span class="w"> </span><span class="err">write</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">these</span><span class="w"> </span><span class="err">fields</span><span class="w">
+  </span><span class="nt">"rec_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fulfil.IO INC"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fulfil.IO INC"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fax"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"mobile"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+
+  </span><span class="err">#</span><span class="w"> </span><span class="err">Classification/Categorization</span><span class="w">
+  </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+
+  </span><span class="err">#</span><span class="w"> </span><span class="err">VAT</span><span class="w"> </span><span class="err">details</span><span class="w"> </span><span class="err">(EU)</span><span class="w">
+  </span><span class="nt">"vat_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"vat_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"vat_country"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+
+  </span><span class="err">#</span><span class="w"> </span><span class="err">ID</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">addresses</span><span class="w">
+  </span><span class="nt">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w">
+
+  </span><span class="err">#</span><span class="w"> </span><span class="err">Stored</span><span class="w"> </span><span class="err">payment</span><span class="w"> </span><span class="err">profiles</span><span class="w"> </span><span class="err">(Credit</span><span class="w"> </span><span class="err">Cards/Bank</span><span class="w"> </span><span class="err">Accounts)</span><span class="w">
+  </span><span class="nt">"default_payment_profile"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"payment_profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+
+  </span><span class="err">#</span><span class="w"> </span><span class="err">Fields</span><span class="w"> </span><span class="err">common</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">all</span><span class="w"> </span><span class="err">records</span><span class="w"> </span><span class="err">(metadata)</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"create_uid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"write_uid"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"create_date"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"second"</span><span class="p">:</span><span class="w"> </span><span class="mi">49</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"microsecond"</span><span class="p">:</span><span class="w"> </span><span class="mi">705297</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"minute"</span><span class="p">:</span><span class="w"> </span><span class="mi">59</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"hour"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="mi">2015</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"__class__"</span><span class="p">:</span><span class="w"> </span><span class="s2">"datetime"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"day"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"month"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"write_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+
+  </span><span class="nt">"channel"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"contact_mechanisms"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+
+  </span><span class="err">#</span><span class="w"> </span><span class="err">Sale</span><span class="w"> </span><span class="err">defaults</span><span class="w">
+  </span><span class="nt">"sale_price_list"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"customer_tax_rule"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"customer_payment_term"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"supplier_location"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"customer_location"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sale_shipment_grouping_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standard"</span><span class="p">,</span><span class="w">
+
+  </span><span class="err">#</span><span class="w"> </span><span class="err">Purchase</span><span class="w"> </span><span class="err">defaults</span><span class="w">
+  </span><span class="nt">"supplier_tax_rule"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"supplier_payment_term"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+
+  </span><span class="err">#</span><span class="w"> </span><span class="err">Channel</span><span class="w"> </span><span class="err">mappings</span><span class="w">
+  </span><span class="nt">"ebay_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"prestashop_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"amazon_user_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"magento_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+
+  </span><span class="err">#</span><span class="w"> </span><span class="err">GL/Accounts</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">receivable</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">payable</span><span class="w">
+  </span><span class="nt">"account_payable"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"account_receivable"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+
+  </span><span class="err">#</span><span class="w"> </span><span class="err">AR</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">AP</span><span class="w"> </span><span class="err">balances.</span><span class="w">
+  </span><span class="nt">"payable_today"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"decimal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"__class__"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Decimal"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"payable"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"decimal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"__class__"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Decimal"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"receivable"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"decimal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"__class__"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Decimal"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"receivable_today"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"decimal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"__class__"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Decimal"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+
+  </span><span class="nt">"nereid_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"nereid_users"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves a specific party.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://demo.fulfil.io/api/v1/model/party.party/&lt;ID&gt;</code></p>
+
+<h3 id="http-request-with-selected-fields">HTTP Request with selected fields</h3>
+
+<p><code class="prettyprint">GET https://demo.fulfil.io/api/v1/model/party.party/&lt;ID&gt;?field=name&amp;field=code</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -183,12 +344,306 @@ Remember — a happy kitten is an authenticated kitten!
 </thead><tbody>
 <tr>
 <td>ID</td>
-<td>The ID of the cat to retrieve</td>
+<td>The ID of the party to retrieve</td>
+</tr>
+<tr>
+<td>field</td>
+<td>Name of additional fields to fetch</td>
 </tr>
 </tbody></table>
 
-          <h1 id='errors'>Errors</h1>
-<p><aside class="notice">This error section is stored in a separate file in <code class="prettyprint">includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the <code class="prettyprint">includes</code> folder and add them to the top of your <code class="prettyprint">index.md</code>&rsquo;s frontmatter. Files are included in the order listed.</aside></p>
+<h1 id="shipments">Shipments</h1>
+
+<h2 id="get-all-customer-shipments">Get all customer shipments</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://demo.fulfil.io/api/v1/model/stock.shipment.out'</span><span class="p">,</span>
+    <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'APIKEY'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://demo.fulfil.io/api/v1/model/stock.shipment.out"</span>
+  -u APIKEY:
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="nt">"rec_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABC Inc."</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves all customer shipments.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://demo.fulfil.io/api/v1/model/stock.shipment.out</code></p>
+
+<h3 id="filter-the-list-for-shipments-in-a-specific-state">Filter the list for shipments in a specific state</h3>
+
+<p><code class="prettyprint">GET https://demo.fulfil.io/api/v1/model/stock.shipment.out?domain=[[&#39;state&#39;, &#39;=&#39;, &#39;waiting&#39;]]</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>1</td>
+<td>Select the page when there are more records</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>10</td>
+<td>The number of results per page. Larger the number, slower the response</td>
+</tr>
+</tbody></table>
+
+<h3 id="states-of-a-customer-shipment">States of a customer shipment</h3>
+
+<table><thead>
+<tr>
+<th>State</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>draft</td>
+<td>A draft shipment. (Default)</td>
+</tr>
+<tr>
+<td>waiting</td>
+<td>Waiting to be allocated inventory.</td>
+</tr>
+<tr>
+<td>assigned</td>
+<td>Inventory has been allocated to the order</td>
+</tr>
+<tr>
+<td>packed</td>
+<td>The package has been made</td>
+</tr>
+<tr>
+<td>done</td>
+<td>The shipment is completed for carrier to pick up</td>
+</tr>
+</tbody></table>
+
+<h2 id="create-a-new-shipment">Create a new shipment</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s">"customer"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s">"delivery_address"</span><span class="p">:</span> <span class="mi">4</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'https://demo.fulfil.io/api/v1/model/stock.shipment.out'</span><span class="p">,</span>
+    <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+    <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'APIKEY'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="se">\</span>
+    -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+    -X POST <span class="se">\</span>
+    -d <span class="s1">'[{"customer": 1}]'</span> <span class="se">\</span>
+    -u APIKEY: <span class="se">\</span>
+    https://demo.fulfil.io/api/v1/model/stock.shipment.out
+</code></pre>
+
+<h3 id="fields-in-customer-shipment">Fields in customer shipment</h3>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Description</th>
+<th>Required</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>customer</td>
+<td>ID of the party to which the shipment is sent to</td>
+<td>yes</td>
+<td>Integer ID</td>
+</tr>
+<tr>
+<td>delivery_address</td>
+<td>The ID of the address to which the shipment is being sent.</td>
+<td>yes</td>
+<td>Integer ID</td>
+</tr>
+<tr>
+<td>code</td>
+<td>A number for the shipment</td>
+<td>no (automatically assigned)</td>
+<td>String</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>Your reference for the shipment. Usually used for order number</td>
+<td>no</td>
+<td>String</td>
+</tr>
+<tr>
+<td>warehouse</td>
+<td>The warehouse from which the shipment should be shipped</td>
+<td>no (if only 1 warehouse)</td>
+<td>Integer ID</td>
+</tr>
+<tr>
+<td>shipping_instructions</td>
+<td>Instruction to print on picking list</td>
+<td>no</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>company</td>
+<td>ID of the company</td>
+<td>no (if only 1 company)</td>
+<td>Integer ID</td>
+</tr>
+<tr>
+<td>tracking_number</td>
+<td>The tracking number of the shipment</td>
+<td>no</td>
+<td>Char</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-a-specific-shipment">Get a specific shipment</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://demo.fulfil.io/api/v1/model/stock.shipment.out/1'</span><span class="p">,</span>
+    <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'APIKEY'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://demo.fulfil.io/api/v1/model/stock.shipment.out/1"</span>
+  -u APIKEY:
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"delivery_address"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"warehouse"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"shipping_instructions"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+
+  </span><span class="err">#</span><span class="w"> </span><span class="err">Shipping</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">carrier</span><span class="w">
+  </span><span class="nt">"carrier"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tracking_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+
+  </span><span class="nt">"priority"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"planned_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"effective_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+
+  </span><span class="err">#</span><span class="w"> </span><span class="err">Fields</span><span class="w"> </span><span class="err">common</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">all</span><span class="w"> </span><span class="err">records</span><span class="w"> </span><span class="err">(metadata)</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"create_uid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"write_uid"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"create_date"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"second"</span><span class="p">:</span><span class="w"> </span><span class="mi">49</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"microsecond"</span><span class="p">:</span><span class="w"> </span><span class="mi">705297</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"minute"</span><span class="p">:</span><span class="w"> </span><span class="mi">59</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"hour"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="mi">2015</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"__class__"</span><span class="p">:</span><span class="w"> </span><span class="s2">"datetime"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"day"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"month"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"write_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+
+  </span><span class="nt">"root_packages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"sales"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+  </span><span class="p">],</span><span class="w">
+
+  </span><span class="nt">"warehouse_storage"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"warehouse_output"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"customer_location"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+
+  </span><span class="nt">"moves"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"outgoing_moves"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"inventory_moves"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+
+  </span><span class="err">#</span><span class="w"> </span><span class="err">Packages</span><span class="p">:</span><span class="w"> </span><span class="err">USefyl</span><span class="w">
+  </span><span class="s2">"packages"</span><span class="err">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+
+  </span><span class="err">#</span><span class="w"> </span><span class="err">Status</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">shipment</span><span class="w">
+  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"draft"</span><span class="p">,</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="creating-a-new-shipment-with-lines">Creating a new shipment (with lines)</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">auth</span> <span class="o">=</span> <span class="p">(</span><span class="s">'APIKEY'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+<span class="n">customer</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">"https://demo.fulfil.io/api/v1/model/party.party/1"</span><span class="p">,</span>
+    <span class="n">auth</span><span class="o">=</span><span class="n">auth</span>
+<span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="n">product1</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">"https://demo.fulfil.io/api/v1/model/product.product/1"</span><span class="p">,</span>
+    <span class="n">auth</span><span class="o">=</span><span class="n">auth</span>
+<span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="n">customer_location</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://demo.fulfil.io/api/v1/model/stock.location?domain=[["code", "=", "CUS"]]'</span><span class="p">,</span>
+    <span class="n">auth</span><span class="o">=</span><span class="n">auth</span>
+<span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">output_location</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">'https://demo.fulfil.io/api/v1/model/stock.location?domain=[["code", "=", "OUT"]]'</span><span class="p">,</span>
+    <span class="n">auth</span><span class="o">=</span><span class="n">auth</span>
+<span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s">"customer"</span><span class="p">:</span> <span class="n">customer</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span>
+        <span class="s">"delivery_address"</span><span class="p">:</span> <span class="n">customer</span><span class="p">[</span><span class="s">"addresses"</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+        <span class="s">"outgoing_moves"</span><span class="p">:</span> <span class="p">[[</span><span class="s">'create'</span><span class="p">,</span> <span class="p">[{</span>
+            <span class="s">"product"</span><span class="p">:</span> <span class="n">product1</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span>
+            <span class="s">"quantity"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="s">"uom"</span><span class="p">:</span> <span class="n">product1</span><span class="p">[</span><span class="s">"default_uom"</span><span class="p">],</span>
+            <span class="s">"to_location"</span><span class="p">:</span> <span class="n">customer_location</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span>
+            <span class="s">"from_location"</span><span class="p">:</span> <span class="n">output_location</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span>
+            <span class="s">"unit_price"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s">"decimal"</span><span class="p">:</span> <span class="s">"200.00"</span><span class="p">,</span>
+                <span class="s">"__class__"</span><span class="p">:</span> <span class="s">"Decimal"</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">}]]]</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s">'https://demo.fulfil.io/api/v1/model/stock.shipment.out'</span><span class="p">,</span>
+    <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+    <span class="n">auth</span><span class="o">=</span><span class="n">auth</span>
+<span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+
+          <h1 id="errors">Errors</h1>
+
+<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
 
 <p>The Kittn API uses the following error codes:</p>
 
@@ -232,7 +687,7 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slown down!</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
 </tr>
 <tr>
 <td>500</td>
@@ -248,7 +703,6 @@ Remember — a happy kitten is an authenticated kitten!
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
                 <a href="#" data-language-name="python">python</a>
           </div>
       </div>
