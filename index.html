@@ -166,7 +166,7 @@ write_date| The UTC timestamp at which the record was last modified. (could be n
 
 <h3 id="filter-the-list">Filter the list</h3>
 
-<p><code class="prettyprint">GET https://demo.fulfil.io/api/v1/model/party.party?domain=[[&#39;name&#39;, &#39;ilike&#39;, &#39;%daniel%&#39;]]</code></p>
+<p><code class="prettyprint">GET https://demo.fulfil.io/api/v1/model/party.party?filter=[[&#39;name&#39;, &#39;ilike&#39;, &#39;%daniel%&#39;]]</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
 
@@ -383,7 +383,7 @@ write_date| The UTC timestamp at which the record was last modified. (could be n
 
 <h3 id="filter-the-list-for-shipments-in-a-specific-state">Filter the list for shipments in a specific state</h3>
 
-<p><code class="prettyprint">GET https://demo.fulfil.io/api/v1/model/stock.shipment.out?domain=[[&#39;state&#39;, &#39;=&#39;, &#39;waiting&#39;]]</code></p>
+<p><code class="prettyprint">GET https://demo.fulfil.io/api/v1/model/stock.shipment.out?filter=[[&#39;state&#39;, &#39;=&#39;, &#39;waiting&#39;]]</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
 
@@ -608,11 +608,11 @@ write_date| The UTC timestamp at which the record was last modified. (could be n
 <span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
 <span class="n">customer_location</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-    <span class="s">'https://demo.fulfil.io/api/v1/model/stock.location?domain=[["code", "=", "CUS"]]'</span><span class="p">,</span>
+    <span class="s">'https://demo.fulfil.io/api/v1/model/stock.location?filter=[["code", "=", "CUS"]]'</span><span class="p">,</span>
     <span class="n">auth</span><span class="o">=</span><span class="n">auth</span>
 <span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">output_location</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-    <span class="s">'https://demo.fulfil.io/api/v1/model/stock.location?domain=[["code", "=", "OUT"]]'</span><span class="p">,</span>
+    <span class="s">'https://demo.fulfil.io/api/v1/model/stock.location?filter=[["code", "=", "OUT"]]'</span><span class="p">,</span>
     <span class="n">auth</span><span class="o">=</span><span class="n">auth</span>
 <span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
 
