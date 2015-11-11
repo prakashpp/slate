@@ -50,14 +50,14 @@ import requests
 
 requests.get(
     'https://demo.fulfil.io/api/v1/test',
-    auth=('APIKEY', None)
+    headers={'x-api-key': APIKEY}
 ).json()
 ```
 
 ```shell
 # With shell, you can just pass the APIKEY as basic auth username
 curl "https://demo.fulfil.io/api/v1/test"
-  -u APIKEY:
+  -H "x-api-key: APIKEY"
 ```
 
 > The above command returns JSON structured like this:
@@ -85,10 +85,10 @@ You should be able to do this from User Preferences menu or
 you can generate it from your Users menu. (Access to the
 users menu is limited to administrators.)
 
-`Authorization: Basic base64-encoded-api-key`
+`x-api-key: APIKEY`
 
 <aside class="notice">
-You must replace <code>base64-encoded-api-key</code> with your base64 encoded API key.
+You must replace <code>key</code> with your API key.
 </aside>
 
 ## Common fields on all records
@@ -111,14 +111,14 @@ import requests
 
 response = requests.get(
     'https://demo.fulfil.io/api/v1/model/party.party',
-    auth=('APIKEY', None)
+    headers={'x-api-key': APIKEY}
 )
 response.json()
 ```
 
 ```shell
 curl "https://demo.fulfil.io/api/v1/model/party.party"
-  -u APIKEY:
+  -H "x-api-key: APIKEY"
 ```
 
 > The above command returns JSON structured like this:
@@ -156,7 +156,7 @@ import requests
 
 response = requests.post(
     'https://demo.fulfil.io/api/v1/model/party.party',
-    auth=('APIKEY', None),
+    headers={'x-api-key': APIKEY},
     json=[{'name': 'New party'}]
 )
 response.json()
@@ -167,7 +167,7 @@ curl \
     -H "Content-Type: application/json" \
     -X POST \
     -d '[{"name": "New party"}]' \
-    -u APIKEY: \
+    -H 'x-api-key: APIKEY' \
     https://demo.fulfil.io/api/v1/model/party.party
 ```
 
@@ -185,14 +185,14 @@ import requests
 
 response = requests.get(
     'https://demo.fulfil.io/api/v1/model/party.party/1',
-    auth=('APIKEY', None)
+    headers={'x-api-key': APIKEY}
 )
 response.json()
 ```
 
 ```shell
 curl "https://demo.fulfil.io/api/v1/model/party.party/1"
-  -u APIKEY:
+  -H 'x-api-key: APIKEY'
 ```
 
 > The above command returns JSON structured like this:
@@ -320,14 +320,14 @@ import requests
 
 response = requests.get(
     'https://demo.fulfil.io/api/v1/model/stock.shipment.out',
-    auth=('APIKEY', None)
+    headers={'x-api-key': APIKEY}
 )
 response.json()
 ```
 
 ```shell
 curl "https://demo.fulfil.io/api/v1/model/stock.shipment.out"
-  -u APIKEY:
+  -H 'x-api-key: APIKEY'
 ```
 
 > The above command returns JSON structured like this:
@@ -379,7 +379,7 @@ data = [
 response = requests.post(
     'https://demo.fulfil.io/api/v1/model/stock.shipment.out',
     json=data,
-    auth=('APIKEY', None)
+    headers={'x-api-key': APIKEY}
 )
 response.json()
 ```
@@ -389,7 +389,7 @@ curl \
     -H "Content-Type: application/json" \
     -X POST \
     -d '[{"customer": 1}]' \
-    -u APIKEY: \
+    -H 'x-api-key: APIKEY' \
     https://demo.fulfil.io/api/v1/model/stock.shipment.out
 ```
 
@@ -414,14 +414,14 @@ import requests
 
 response = requests.get(
     'https://demo.fulfil.io/api/v1/model/stock.shipment.out/1',
-    auth=('APIKEY', None)
+    headers={'x-api-key': APIKEY}
 )
 response.json()
 ```
 
 ```shell
 curl "https://demo.fulfil.io/api/v1/model/stock.shipment.out/1"
-  -u APIKEY:
+  -H 'x-api-key: APIKEY'
 ```
 
 > The above command returns JSON structured like this:
@@ -488,25 +488,25 @@ curl "https://demo.fulfil.io/api/v1/model/stock.shipment.out/1"
 ```python
 import requests
 
-auth = ('APIKEY', None)
+headers = {'x-api-key': APIKEY}
 
 customer = requests.get(
     "https://demo.fulfil.io/api/v1/model/party.party/1",
-    auth=auth
+    headers=headers
 ).json()
 
 product1 = requests.get(
     "https://demo.fulfil.io/api/v1/model/product.product/1",
-    auth=auth
+    headers=headers
 ).json()
 
 customer_location = requests.get(
     'https://demo.fulfil.io/api/v1/model/stock.location?filter=[["code", "=", "CUS"]]',
-    auth=auth
+    headers=headers
 ).json()[0]
 output_location = requests.get(
     'https://demo.fulfil.io/api/v1/model/stock.location?filter=[["code", "=", "OUT"]]',
-    auth=auth
+    headers=headers
 ).json()[0]
 
 data = [
@@ -529,7 +529,7 @@ data = [
 response = requests.post(
     'https://demo.fulfil.io/api/v1/model/stock.shipment.out',
     json=data,
-    auth=auth
+    headers=headers
 )
 response.json()
 ```
